@@ -4,11 +4,11 @@ session_start();
 if(isset($_GET['logout'])){
     if($_GET['logout'] == "true"){
         unset($_SESSION['user']);
-        // header("Location: 11-login-form.php");
     }
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

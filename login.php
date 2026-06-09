@@ -1,34 +1,48 @@
 <?php
+
 session_start();
 
-$username = isset($_POST['username']) ? $_POST['username'] : null;
-$password = isset($_POST['password']) ? $_POST['password'] : null;
+$username = isset($_POST['username'])
+    ? $_POST['username']: null;
 
-if(isset($_POST['username'])){
-    $db = new PDO("mysql:host=localhost;dbname=final_project", "root");
+$password = isset($_POST['password'])
+    ? $_POST['password']: null;
+
+if (isset($_POST['username'])) {
+    $db = new PDO(
+        "mysql:host=localhost;dbname=final_project","root");
 
     $query = "SELECT * FROM users WHERE username=:username";
-
     $stmt = $db->prepare($query);
-    $stmt->execute(array(
-        ':username'=>$username
-    ));
+    $stmt->execute([
+        ':username' => $username
+    ]);
+
     $user = $stmt->fetchAll();
 
-    $is_password_match = password_verify($password, $user[0]['password']);
+    if (count($user) > 0) {
+        $is_password_match = password_verify(
+            $password,
+            $user[0]['password']
+        );
 
-    echo $is_password_match ? "<h1>Correct password!</h1>" : "<h1>Wrong password!</h1>";
+        if ($is_password_match) {
+            $_SESSION['user'] = $user[0];
 
-    if($is_password_match){
-        $_SESSION['user'] = $user[0];
+            if ($user[0]['role'] == 'admin') {
+                header("Location:dashboard.php");
+            } else {
+                header("Location: games.php");
+            }
+
+            exit();
+        } else {
+            echo "<h1>Wrong Password!</h1>";
+            echo "<a href='login-form.php'>Try Again</a>";
+        }
+    } else {
+        echo "<h1>User Not Found!</h1>";
+        echo "<a href='login-form.php'>Try Again</a>";
     }
-}else{
-    echo "<h1>User is successfully logged in!</h1>";
-    print_r($_SESSION['user']);
-    // Short Exercise:
-    // Add a logout link, linked to a logout.php file, that clears the session.
-    // In the logout file, add a link to login-form.php to close the loop.
 }
-echo "<h2><a href='./logout.php?logout=true'> Click here to logout </a></h2>";
-
 ?>

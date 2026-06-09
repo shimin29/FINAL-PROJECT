@@ -9,7 +9,7 @@ if(isset($_SESSION['user'])){
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Simple CMS</title>
+    <title>Online Gaming Review</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -28,29 +28,17 @@ if(isset($_SESSION['user'])){
   </head>
   <body>
     <div class="container my-5 mx-auto" style="max-width: 500px;">
-      <h1 class="h1 mb-4 text-center">Login</h1>
+      <h1 class="h1 mb-4 text-center">Game Review Login</h1>
 
       <div class="card p-4">
         <form method="POST" action="login.php">
           <div class="mb-2">
             <label for="username" class="visually-hidden">Username</label>
-            <input
-              type="text"
-              class="form-control"
-              id="username"
-              name="username"
-              placeholder="username"
-            />
+            <input type="text" class="form-control" id="username" name="username" placeholder="username"/>
           </div>
           <div class="mb-2">
             <label for="password" class="visually-hidden">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              name="password"
-              placeholder="Password"
-            />
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password"/>
           </div>
           <div class="d-grid">
             <button type="submit" class="btn btn-primary">Login</button>
@@ -63,7 +51,7 @@ if(isset($_SESSION['user'])){
         class="d-flex justify-content-between align-items-center gap-3 mx-auto pt-3"
       >
         <a href="index.php" class="text-decoration-none small"
-          ><i class="bi bi-arrow-left-circle"></i> Go back </a
+          ><i class="bi bi-arrow-left-circle"></i> Go back</a
         >
         <a href="register-form.php" class="text-decoration-none small"
           >Don't have an account? Sign up here
@@ -79,4 +67,3 @@ if(isset($_SESSION['user'])){
     ></script>
   </body>
 </html>
- 
