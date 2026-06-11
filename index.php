@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +18,7 @@
     body {
         background: #f5f5f5;
     }
+
     /* Sidebar */
     .sidebar {
         background: linear-gradient(180deg,
@@ -163,39 +168,32 @@
                 </a>
 
                 <!-- sidebar setting -->
-                <a class="sidebar-link d-flex justify-content-between align-items-center"
-                    data-bs-toggle="collapse"
-                    href="#settingMenu"
-                    role="button"
-                    aria-expanded="false">
-
+                <a class="sidebar-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#settingMenu" role="button" aria-expanded="false">
                     <span>
                         <i class="bi bi-gear me-2"></i> Setting
                     </span>
-                    <i class="bi bi-chevron-down arrow"></i></a>
+                    <i class="bi bi-chevron-down arrow"></i>
+                </a>
                 <div class="collapse" id="settingMenu">
                     <ul class="submenu">
-                        <li><a href="manage-users.php/admin.php">Profile</a></li>
-                        <li><a href="login-form.php">Login</a></li>
-                        <li><a href="register-form.php">Register</a></li>
+                        <?php if (isset($_SESSION['user'])) { ?>
+                            <li><a href="logout.php?logout=true">Logout</a></li>
+                        <?php } else { ?>
+                            <li><a href="login-form.php">Login</a></li>
+                            <li><a href="register-form.php">Sign Up</a></li>
+                        <?php } ?>
                     </ul>
                 </div>
-                </a>
+                
+                <!-- Main Content -->
+                <div class="col-md-10 p-4">
+                    <h1>Game Reviews Hub</h1>
 
-                <?php if (isset($_SESSION['user_id'])) { ?>
-                    <a href="reviews.php" class="sidebar-link">My Reviews</a>
-                <?php } ?>
+                    <!-- 游戏卡片放这里 -->
+                </div>
+
             </div>
-
-            <!-- Main Content -->
-            <div class="col-md-10 p-4">
-                <h1>Game Reviews Hub</h1>
-
-                <!-- 游戏卡片放这里 -->
-            </div>
-
         </div>
-    </div>
 </body>
 
 </html>

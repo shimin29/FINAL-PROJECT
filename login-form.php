@@ -1,10 +1,15 @@
 <?php
-session_start();
-
 if (isset($_SESSION['user'])) {
-  header("Location: index.php");
+
+  if ($_SESSION['user']['role'] == 'admin') {
+    header("Location: dashboard.php");
+  } else {
+    header("Location: games.php");
+  }
+
   exit();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +98,8 @@ if (isset($_SESSION['user'])) {
         <div class="card login-card p-4">
 
           <?php if (isset($_GET['error'])) { ?>
-            <div class="alert alert-danger">
+            <div class="alert alert-danger text-center">
+              <i class="bi bi-exclamation-triangle-fill"></i>
               Invalid username or password.
             </div>
           <?php } ?>

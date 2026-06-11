@@ -7,7 +7,7 @@ $password = isset($_POST['password']) ? $_POST['password'] : null;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $db = new PDO("mysql:host=localhost;dbname=final_project", "root");
+    $db = new PDO("mysql:host=localhost;dbname=final_project", "root" , "");
 
     $query = "SELECT * FROM users WHERE username = :username";
 
