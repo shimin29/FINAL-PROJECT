@@ -1,43 +1,118 @@
 <?php
 
-$username = isset($_POST['username']) ? $_POST['username'] : null;
-$email = isset($_POST['email']) ? $_POST['email'] : null;
-$password = isset($_POST['password']) ? $_POST['password'] : null;
+$message = "";
 
-$db = new PDO("mysql:host=localhost;dbname=final_project", "root");
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-$query = "INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password, :role)";
+    $username = isset($_POST['username']) ? $_POST['username'] : null;
+    $email = isset($_POST['email']) ? $_POST['email'] : null;
+    $password = isset($_POST['password']) ? $_POST['password'] : null;
 
-$stmt = $db->prepare($query);
-$stmt->execute(array(
-    ':username' => $username,
-    ':email' => $email,
-    ':password' => password_hash($password, PASSWORD_BCRYPT),
-    ':role' => 2
-));
+    if ($username && $email && $password) {
+
+        $db = new PDO("mysql:host=localhost;dbname=final_project", "root", "");
+
+        $query = "INSERT INTO users (username, email, password, role)
+                  VALUES (:username, :email, :password, :role)";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->execute([
+            ':username' => $username,
+            ':email' => $email,
+            ':password' => password_hash($password, PASSWORD_BCRYPT),
+            ':role' => 'user'
+        ]);
+    }
+}
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-    <title>Online Gaming Review</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" />
-    <style type="text/css">
-        body {
-            background: #f1f1f1;
-        }
-    </style>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User registered</title>
+    <title>Registration Successful</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg,
+                    #1a1a28,
+                    #2d1b45);
+            min-height: 100vh;
+        }
+
+        .success-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .success-icon {
+            font-size: 80px;
+            color: #ff69b4;
+        }
+
+        .btn-login {
+            background: #ff69b4;
+            color: white;
+            border: none;
+        }
+
+        .btn-login:hover {
+            background: #ff4fa3;
+            color: white;
+        }
+
+        .logo {
+            color: #ff69b4;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>User has been successfully registered.</h1>
-   <div class="d-flex gap-3 align-items-center mx-auto pt-3"><a href="index.php" class="text-decoration-none small"><i class="bi bi-arrow-left-circle"></i> Go back</a>
-        <a href="login-form.php" class="text-decoration-none small">Already have an account? Login here <i class="bi bi-arrow-right-circle"></i></a>
+
+    <div class="container vh-100 d-flex justify-content-center align-items-center">
+
+        <div class="success-card text-center">
+
+            <h3 class="logo mb-4">
+                <i class="bi bi-controller"></i> OGR
+            </h3>
+
+            <i class="bi bi-check-circle-fill success-icon"></i>
+
+            <h1 class="fw-bold mt-4">
+                Registration Successful!
+            </h1>
+
+            <p class="text-muted mt-3">
+                Your account has been created successfully.
+                You can now login and start reviewing your favorite games.
+            </p>
+
+            <div class="d-flex justify-content-center gap-3 mt-4">
+
+                <a href="index.php" class="btn btn-outline-secondary">
+                    <i class="bi bi-house"></i>
+                    Home
+                </a>
+
+                <a href="login-form.php" class="btn btn-login">
+                    Login Now
+                    <i class="bi bi-arrow-right-circle"></i>
+                </a>
+            </div>
         </div>
     </div>
 </body>
