@@ -188,14 +188,14 @@ $totalCategories = $db->query("SELECT COUNT(*) FROM categories")->fetchColumn();
                 <div class="card manage-card p-4">
                     <h5><i class="bi bi-chat-square-text"></i> Manage Reviews</h5>
                     <p class="text-muted">Check all user game reviews.</p>
-                    <a href="manage-reviews.php" class="btn btn-pink">Open</a>
+                    <a href="manage-review.php" class="btn btn-pink">Open</a>
                 </div>
             </div>
 
         </div>
 
         <div class="mt-4">
-            <a href="games.php" class="btn btn-outline-secondary">
+            <a href="index.php" class="btn btn-outline-secondary">
                 <i class="bi bi-arrow-left-circle"></i> View Website
             </a>
 

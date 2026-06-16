@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($user['role'] == 'admin') {
                 header("Location: dashboard.php");
             } else {
-                header("Location: games.php");
+                header("Location: index.php");
             }
 
             exit();

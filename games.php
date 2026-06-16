@@ -8,11 +8,28 @@ if (!isset($_SESSION['user'])) {
 
 $db = new PDO("mysql:host=localhost;dbname=final_project", "root", "");
 
-$query = "SELECT games.*, categories.category_name
-FROM games LEFT JOIN categories ON games.category_id = categories.category_id ";
+if (isset($_GET['category'])) {
 
-$stmt = $db->prepare($query);
-$stmt->execute();
+    $query = "SELECT games.*, categories.category_name
+              FROM games
+              LEFT JOIN categories
+              ON games.category_id = categories.category_id
+              WHERE games.category_id = :category";
+
+    $stmt = $db->prepare($query);
+    $stmt->execute([
+        ':category' => $_GET['category']
+    ]);
+} else {
+
+    $query = "SELECT games.*, categories.category_name
+              FROM games
+              LEFT JOIN categories
+              ON games.category_id = categories.category_id";
+
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+}
 
 $games = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -104,20 +121,29 @@ $games = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-
     <div class="container my-5">
+        <div class="row align-items-center mb-4">
 
-        <h1 class="fw-bold">
-            <i class="bi bi-controller"></i>
-            All Games
-        </h1>
+            <div class="col">
+                <h1 class="fw-bold mb-0">
+                    <i class="bi bi-controller"></i>
+                    All Games
+                </h1>
+                <p class="text-muted mb-0">
+                    Browse and discover your favorite games.
+                </p>
+            </div>
 
-        <p class="text-muted mb-4">
-            Browse and discover your favorite games.
-        </p>
+            <div class="col-auto">
+                <a href="index.php" class="btn btn-pink">
+                    <i class="bi bi-house-door-fill"></i>
+                    Back to Home
+                </a>
+            </div>
+
+        </div>
 
         <div class="row g-4">
-            
 
             <?php foreach ($games as $game) { ?>
 
