@@ -148,7 +148,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php echo $game['description']; ?>
                     </p>
 
-                    <a href="write-review.php" class="btn btn-pink mt-3">
+                    <a href="write-review.php?game_id=<?php echo $game['game_id']; ?>" class="btn btn-pink mt-3">
                         <i class="bi bi-pencil-square"></i>
                         Write Review
                     </a>

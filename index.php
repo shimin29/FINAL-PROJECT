@@ -200,7 +200,7 @@ session_start();
 
                 <a href="my-favourites.php" class="sidebar-link">
                     <i class="bi bi-heart-fill"></i>
-                    My Favourites
+                     Favourites
                 </a>
 
             </div>
