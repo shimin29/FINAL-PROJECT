@@ -35,5 +35,4 @@ if (!$exists) {
     ]);
 }
 
-header("Location: game-details.php?id=" . $game_id);
-exit();
+header("Location: my-favourites.php"); exit();
