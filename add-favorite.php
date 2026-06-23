@@ -34,3 +34,4 @@ if (!$exists) {
 }
 
 header("Location: my-favourites.php"); exit();
+?>
