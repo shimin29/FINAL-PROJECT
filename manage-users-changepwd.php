@@ -22,9 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_POST['password'] != $_POST['confirm_password']) {
         $error = "Password and Confirm Password do not match.";
     } else {
-        $query = "UPDATE users
-                  SET password = :password
-                  WHERE user_id = :user_id";
+        $query = "UPDATE users SET password = :password WHERE user_id = :user_id";
 
         $stmt = $db->prepare($query);
         $stmt->execute([
